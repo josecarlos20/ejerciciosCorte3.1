@@ -1,0 +1,162 @@
+class PilaStack {
+  // 1. Constructor
+  // se crea el constructor con los atributos basicos que necesita la clase
+  constructor(){
+    this.elementos = [];
+  }
+
+      // 1. Llenar la FILA con N elementos
+  ejercicios1(n) {
+    for (let i = 0; i < n; i++) {
+      const elemento = Math.floor(Math.random() * 10); // Generar números aleatorios
+      this.insertar(elemento);
+    }
+  }
+
+      // 2. Verificar si todos los elementos son pares o impares
+  sonPares() {
+    return this.elementos.every((elemento) => typeof elemento === 'number' && elemento % 2 === 0);
+  }
+
+  sonImpares() {
+    return this.elementos.every((elemento) => typeof elemento === 'number' && elemento % 2 !== 0);
+  }
+
+      // 3. Sumar todos los elementos numéricos
+  sumaElementosNumericos() {
+    return this.elementos
+      .filter((elemento) => typeof elemento === 'number')
+      .reduce((acc, elemento) => acc + elemento, 0);
+  }
+
+      // 4. Obtener números pares
+  obtenerNumerosPares() {
+    return this.elementos.filter((elemento) => typeof elemento === 'number' && elemento % 2 === 0);
+  }
+
+      // 5. Obtener números impares
+  obtenerNumerosImpares() {
+    return this.elementos.filter((elemento) => typeof elemento === 'number' && elemento % 2 !== 0);
+  }
+
+      // 6. Obtener cadenas o strings
+  obtenerCadenas() {
+    return this.elementos.filter((elemento) => typeof elemento === 'string');
+  }
+
+      // 7. Contar la cantidad de tipos de datos
+  contarTiposDeDatos() {
+    let contador = {
+      strings: 0,
+      number: 0,
+      array: 0
+    };
+
+    for (const elemento of this.elementos) {
+      if (typeof elemento === 'string') {
+        contador.strings++;
+      } else if (typeof elemento === 'number') {
+        contador.number++;
+      } else if (Array.isArray(elemento)) {
+        contador.array++;
+      }
+    }
+
+    return contador;
+  }
+
+      // 8. Eliminar elemento por nombre
+  eliminarElementoPorNombre(nombre) {
+    const index = this.elementos.findIndex((elemento) => elemento.url === nombre);
+    if (index !== -1) {
+      this.elementos.splice(index, 1);
+    } else {
+      console.log(`El elemento con nombre "${nombre}" no se encontró en la FILA.`);
+    }
+  }
+
+      // 9. Eliminar elemento por posición
+  eliminarElementoPorPosicion(posicion) {
+    if (posicion >= 0 && posicion < this.elementos.length) {
+      this.elementos.splice(posicion, 1);
+    } else {
+      console.log(`La posición ${posicion} no existe en la FILA.`);
+    }
+  }
+
+      // 10. Eliminar elementos hasta la posición dada
+  eliminarHastaPosicion(posicion) {
+    if (posicion >= 0 && posicion < this.elementos.length) {
+      this.elementos.splice(0, posicion + 1);
+    } else {
+      console.log(`La posición ${posicion} no existe en la FILA.`);
+    }
+  }
+
+  // 2. Insertar
+  insertar(elemento){
+    // se agrega el elemento al arreglo
+    this.elementos.push(elemento);
+  }
+  // 3. Extraer
+  extraer(){
+    // se toma el ultimo elemento con el tamaño - 1 recordar que los arreglos empiezan en 0 no en 1
+    const ultimo = this.elementos[this.elementos.length - 1];
+    // se elimina del arreglo el ultimo elemento ingresado
+    this.elementos.pop();
+    // devuelve el ultimo elemento
+    return ultimo;
+  };
+  // 4. Longitud
+  longitud(){
+    // tamaño de la pila
+    return this.elementos.length;
+  }
+  // 5. Ver proximo
+  ver_proximo(){
+    // se mira el siguiente elemento a salir de la pila pero sin eliminarlo del arreglo
+    return this.elementos[this.elementos.length - 1];
+  }
+  // 6. Ver Elementos o toda la pila
+  ver_elementos(){
+    // se mira toda la pila como esta
+    return this.elementos;
+  }
+}
+
+const pila = new PilaStack();
+
+// Ejercicio 1: Llenar la FILA con N elementos
+pila.ejercicios1(4);
+console.log(pila.ver_elementos());
+
+// Ejercicio 2: Verificar si todos los elementos son pares o impares
+console.log(`¿Todos los elementos son pares? ${pila.sonPares()}`);
+console.log(`¿Todos los elementos son impares? ${pila.sonImpares()}`);
+
+// Ejercicio 3: Sumar todos los elementos numéricos
+console.log(`Suma de elementos numéricos: ${pila.sumaElementosNumericos()}`);
+
+// Ejercicio 4: Obtener números pares
+console.log(`Números pares: ${pila.obtenerNumerosPares()}`);
+
+// Ejercicio 5: Obtener números impares
+console.log(`Números impares: ${pila.obtenerNumerosImpares()}`);
+
+// Ejercicio 6: Obtener cadenas o strings
+console.log(`Cadenas o strings: ${pila.obtenerCadenas()}`);
+
+// Ejercicio 7: Contar la cantidad de tipos de datos
+console.log(`Conteo de tipos de datos: ${JSON.stringify(pila.contarTiposDeDatos())}`);
+
+// Ejercicio 8: Eliminar elemento por nombre
+pila.eliminarElementoPorNombre('Milo');
+console.log(pila.ver_elementos());
+
+// Ejercicio 9: Eliminar elemento por posición
+pila.eliminarElementoPorPosicion(1);
+console.log(pila.ver_elementos());
+
+// Ejercicio 10: Eliminar elementos hasta la posición dada
+pila.eliminarHastaPosicion(2);
+console.log(pila.ver_elementos());
