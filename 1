@@ -1,0 +1,225 @@
+// se crea la clase
+class ColaFila{
+  // 1. Constructor
+  // se crea el constructor con los atributos basicos que necesita la clase
+  constructor(){
+    this.elementos = {};
+    this.primero = 0;
+    this.final = 0;
+  }
+
+  // METODOS
+    // Ejercicio 1: Llenar la FILA con elementos del 3 al N + 2
+  ejercicios1(N) {
+    for (let i = 3; i < N + 3; i++) {
+      this.encolar(i);
+    }
+  }
+
+    // Ejercicio 2: Comprobar si los elementos son pares o impares
+  sonParesImpares() {
+    let esPar = true;
+    let esImpar = true;
+
+    for (let contador = this.primero; contador < this.final; contador++) {
+      const elemento = this.elementos[contador];
+      if (typeof elemento !== 'number') continue; // Saltar elementos no numéricos
+
+      if (elemento % 2 === 0) {
+        esImpar = false;
+      } else {
+        esPar = false;
+      }
+    }
+
+    return { esPar, esImpar };
+  }
+  
+    // Ejercicio 3: Sumar elementos numéricos
+  sumaElementosNumericos() {
+    let suma = 0;
+
+    for (let contador = this.primero; contador < this.final; contador++) {
+      const elemento = this.elementos[contador];
+      if (typeof elemento === 'number') {
+        suma += elemento;
+      }
+    }
+
+    return suma;
+  }
+
+    // Ejercicio 4: Devolver un arreglo con números pares
+  numerosPares() {
+    const pares = [];
+
+    for (let contador = this.primero; contador < this.final; contador++) {
+      const elemento = this.elementos[contador];
+      if (typeof elemento === 'number' && elemento % 2 === 0) {
+        pares.push(elemento);
+      }
+    }
+
+    return pares;
+  }
+
+    // Ejercicio 5: Devolver un arreglo con números impares
+  numerosImpares() {
+    const impares = [];
+
+    for (let contador = this.primero; contador < this.final; contador++) {
+      const elemento = this.elementos[contador];
+      if (typeof elemento === 'number' && elemento % 2 !== 0) {
+        impares.push(elemento);
+      }
+    }
+
+    return impares;
+  }
+
+  
+  // Ejercicio 6: Devolver un arreglo con cadenas o strings
+  cadenas() {
+    const strings = [];
+
+    for (let contador = this.primero; contador < this.final; contador++) {
+      const elemento = this.elementos[contador];
+      if (typeof elemento === 'string') {
+        strings.push(elemento);
+      }
+    }
+
+    return strings;
+  }
+
+    // Ejercicio 7: Contar la cantidad de tipos de datos: strings, number, array
+  contarTiposDeDatos() {
+    let strings = 0;
+    let numeros = 0;
+    let arreglos = 0;
+
+    for (let contador = this.primero; contador < this.final; contador++) {
+      const elemento = this.elementos[contador];
+      if (typeof elemento === 'string') {
+        strings++;
+      } else if (typeof elemento === 'number') {
+        numeros++;
+      } else if (Array.isArray(elemento)) {
+        arreglos++;
+      }
+    }
+
+    return { strings, numeros, arreglos };
+  }
+
+    // Ejercicio 8: Eliminar un elemento por nombre
+  eliminarPorNombre(nombre) {
+    for (let contador = this.primero; contador < this.final; contador++) {
+      if (this.elementos[contador] === nombre) {
+        delete this.elementos[contador];
+        this.primero++;
+        return `Elemento ${nombre} eliminado correctamente.`;
+      }
+    }
+    return `El elemento ${nombre} no se encontró en la cola.`;
+  }
+  
+    // Ejercicio 9: Eliminar un elemento por posición
+  eliminarPorPosicion(posicion) {
+    if (posicion < this.tamano_fila()) {
+      delete this.elementos[this.primero + posicion];
+      this.primero++;
+      return `Elemento en la posición ${posicion} eliminado correctamente.`;
+    }
+    return `No se encontró ningún elemento en la posición ${posicion} de la cola.`;
+  }
+
+    // Ejercicio 10: Eliminar elementos hasta una posición
+  eliminarHastaPosicion(posicion) {
+    if (posicion < this.tamano_fila()) {
+      this.primero += posicion + 1;
+      return `Se han eliminado elementos hasta la posición ${posicion} de la cola.`;
+    }
+    return `La cola no contiene ${posicion} elementos para eliminar hasta esa posición.`;
+  }
+
+  // 2. Encolar-Insertar-enqueue
+  encolar(info){
+    // se toma la posicion final en la que vamos y 
+    // nos ubicamos en la fila en esa posicion para 
+    // ingresar el nuevo elemento persona string numero o dato
+    this.elementos[this.final] = info;
+    // aumentamos la posicion final un turno
+    this.final++;
+  }
+  // 3. Desencolar-Atender-Siguiente en fila-dequeue
+  desencolar(){
+    // se revisa primero si la cola esta vacia 
+    // es decir no hay nada o nadie en la cola
+    if(this.primero === this.final){
+      return null;
+    }
+    // se toma la posicion primera de la cola y se trae ese 
+    // elemento persona string numero o dato
+    const info = this.elementos[this.primero];
+    // se elimina el elemento persona dato string
+    delete this.elementos[this.primero];
+    // aumentamos la posicion primera un turno
+    this.primero++;
+    // se devuelve info
+    return info;
+  }
+  // 4. Tamaño fila - get_size
+  tamano_fila(){
+    // simplemente se resta la posicion final con la inicial y 
+    // ese es el tamaño actual de la cola
+    return this.final - this.primero;
+  }
+  // 5. Esta vacia - is_empty
+  esta_vacia(){
+    // se revisa si tamaño actual de la fila es 0
+    if(this.tamano_fila() === 0){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  // 6. Mirar siguiente elemento sin desencolarlo- ver siguiente - peek
+  ver_siguiente(){
+    // se revisa si tamaño actual de la fila es 0
+    if(this.tamano_fila() === 0){
+      // se devuelve null o nada
+      return null;
+    }
+    // si no es 0 se devuelve el elemento que va primero en la fila
+    return this.elementos[this.primero];
+  }
+  // 7. imprimir toda la fila - print
+  imprimir(){
+    // se revisa si tamaño actual de la fila es 0
+    if(this.tamano_fila() === 0){
+      // se devuelve null o nada
+      return null;
+    }
+    // se inicializa una variable en vacio
+    let respuesta = '';
+    // se genera un ciclo para devolver una cadena con cada dato persona numero
+    for(let contador = this.primero; contador < this.final; contador++) {
+      // se contatena elemento por elemento de la cola
+      respuesta += this.elementos[contador] + " ";
+    }
+    return respuesta;
+  }
+}
+
+const cola = new ColaFila();
+cola.ejercicios1(4); // Ejercicio 1
+console.log(cola.sonParesImpares()); // Ejercicio 2
+console.log(cola.sumaElementosNumericos()); // Ejercicio 3
+console.log(cola.numerosPares()); // Ejercicio 4
+console.log(cola.numerosImpares()); // Ejercicio 5
+console.log(cola.cadenas()); // Ejercicio 6
+console.log(cola.contarTiposDeDatos()); // Ejercicio 7
+console.log(cola.eliminarPorNombre("Milo")); // Ejercicio 8
+console.log(cola.eliminarPorPosicion(2)); // Ejercicio 9
+console.log(cola.eliminarHastaPosicion(1)); // Ejercicio 10
