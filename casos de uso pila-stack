@@ -1,0 +1,151 @@
+    function PilaStack() {
+      this.elementos = [];
+    
+      this.enpilar = function (elemento) {
+        this.elementos.push(elemento);
+      }
+    
+      this.desenpilar = () => {
+        const ultimo = this.elementos[this.elementos.length - 1];
+        this.elementos.pop();
+        return ultimo;
+      };
+    
+      this.longitud = function () {
+        return this.elementos.length;
+      }
+    
+      this.verProximo = () => {
+        return this.elementos[this.elementos.length - 1];
+      }
+    
+      this.verElementos = function () {
+        return this.elementos;
+      }
+    
+      this.ejercicio1 = function (numero) {
+        for (let i = 1; i <= numero; i++) {
+          this.enpilar(i);
+        }
+        return this.elementos;
+      }
+    
+      this.ejercicio2 = function () {
+        return this.elementos.every((elemento, index) => elemento % 2 === index % 2);
+      }
+    
+      this.ejercicio3 = function () {
+        return this.elementos
+          .filter(elemento => typeof elemento === 'number')
+          .reduce((acc, elemento) => acc + elemento, 0);
+      }
+    
+      this.ejercicio4 = function () {
+        return this.elementos.filter(elemento => typeof elemento === 'number' && elemento % 2 === 0);
+      }
+    
+      this.ejercicio5 = function () {
+        return this.elementos.filter(elemento => typeof elemento === 'number' && elemento % 2 !== 0);
+      }
+    
+      this.ejercicio6 = function () {
+        return this.elementos.filter(elemento => typeof elemento === 'string');
+      }
+    
+      this.ejercicio7 = function () {
+        let contador = {
+          strings: 0,
+          number: 0,
+          array: 0
+        };
+    
+        this.elementos.forEach((elemento) => {
+          if (typeof elemento === 'string') {
+            contador.strings++;
+          } else if (typeof elemento === 'number') {
+            contador.number++;
+          } else if (Array.isArray(elemento)) {
+            contador.array++;
+          }
+        });
+    
+        return contador;
+      }
+    
+    this.ejercicio8 = function (nombre) {
+      const index = this.elementos.indexOf(nombre);
+      if (index !== -1) {
+        this.elementos.splice(index, 1);
+        return this.elementos;
+      } else {
+        return "El elemento no se encontró en la Pila.";
+      }
+    }
+    
+    // Ejercicio 9: Eliminar elemento por posición
+    this.ejercicio9 = function (posicion) {
+      if (posicion >= 0 && posicion < this.elementos.length) {
+        this.elementos.splice(posicion, 1);
+        return this.elementos;
+      } else {
+        return "La posición no existe en la Pila.";
+      }
+    }
+    
+    // Ejercicio 10: Eliminar elementos hasta la posición dada
+    this.ejercicio10 = function (posicion) {
+      if (posicion >= 0 && posicion < this.elementos.length) {
+        this.elementos = this.elementos.slice(posicion + 1);
+        return this.elementos;
+      } else {
+        return "La posición no existe en la Pila.";
+      }
+    }
+  }
+const pila = new PilaStack();
+const pila1 = new PilaStack();
+pila1.enpilar(2)
+pila1.enpilar('MIKE')
+pila1.enpilar(4)
+pila1.enpilar('ROST')
+pila1.enpilar(6)
+pila1.enpilar('LILA')
+pila1.enpilar(8)
+pila1.enpilar('JUAN')
+pila1.enpilar('PIPE')
+pila1.enpilar(10)
+
+
+const pila2 = new PilaStack();
+pila2.enpilar(2)
+pila2.enpilar('MIKE')
+pila2.enpilar(1)
+pila2.enpilar('ROST')
+pila2.enpilar(2)
+pila2.enpilar('LILA')
+pila2.enpilar(3)
+pila2.enpilar('JUAN')
+pila2.enpilar('PIPE')
+pila2.enpilar(10)
+
+
+pila.ejercicio1(4);
+console.log("Ejercicio 1 Resultado:", pila.verElementos());
+
+console.log("Ejercicio 2 Resultado (¿Todos los elementos siguen el patrón par, impar, par, impar?):", pila.ejercicio2());
+
+console.log("Ejercicio 3 Resultado (Suma de elementos numéricos):", pila.ejercicio3());
+
+console.log("Ejercicio 4 Resultado (Números pares en orden de salida):", pila.ejercicio4());
+
+console.log("Ejercicio 5 Resultado (Números impares en orden de salida):", pila.ejercicio5());
+
+console.log("Ejercicio 6 Resultado (Cadenas o strings en orden de salida):", pila.ejercicio6());
+
+console.log("Ejercicio 7 Resultado (Conteo de tipos de datos):", pila.ejercicio7());
+
+console.log("Ejercicio 8 Resultado (Eliminar elemento por nombre 'Milo'):", pila.ejercicio8('Milo'));
+
+console.log("Ejercicio 9 Resultado (Eliminar elemento por posición 1):", pila.ejercicio9(1));
+
+console.log("Ejercicio 10 Resultado (Eliminar elementos hasta la posición 2):", pila.ejercicio10(2));
