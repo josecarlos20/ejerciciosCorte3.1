@@ -1,0 +1,445 @@
+class Fila {
+    constructor() {
+        this.items = [];
+    }
+
+    enfilar(item) {
+        this.items.push(item);
+    }
+
+    desenfilar() {
+        return this.items.shift();
+    }
+
+    isVacio() {
+        return this.items.length === 0;
+    }
+
+    tamano() {
+        return this.items.length;
+    }
+    //objetivo: encolar los datos ingresados con un push en el array de items segun el tamaño ingresado
+    ejercicio1(N) {
+        for (let i = 0; i < N; i++) {
+            this.enfilar(i + 1);
+        }
+        return this.items;
+    }
+    //objetivo: Validar si el item entrante es un número y por consiguiente revisar si es par o no
+    ejercicio2() {
+        const onlyNumber = this.items.map((elemento) => {
+            if (typeof elemento === "number") {
+              return elemento;
+            } else {
+              return null; // O cualquier otro valor que desees para elementos no numéricos.
+            }
+          }).filter((elemento) => elemento !== null);
+
+        if (onlyNumber.length < 4) {
+            return false; // Un arreglo con menos de 4 elementos no puede seguir una secuencia.
+        }
+
+        for (let i = 0; i < onlyNumber.length - 1; i++) {
+            if (i % 2 === 0) {
+                if (onlyNumber[i] % 2 !== 0) {
+                    return false; // Debe ser un número par en una posición par.
+                }
+            } else {
+                if (onlyNumber[i] % 2 !== 1) {
+                    return false; // Debe ser un número impar en una posición impar.
+                }
+            }
+        }
+
+        return true; // Si el arreglo pasa todas las validaciones, sigue la secuencia.
+
+    }
+
+    ejercicio3() {
+        let sum = 0;
+        for (let i = 0; i < this.items.length; i++) {
+            if (typeof this.items[i] === 'number') {
+                sum += this.items[i];
+            }
+        }
+        return sum;
+    }
+
+    ejercicio4() {
+        return this.items.filter(item => typeof item === 'number' && item % 2 === 0);
+    }
+
+    ejercicio5() {
+        return this.items.filter(item => typeof item === 'number' && item % 2 !== 0);
+    }
+
+    ejercicio6() {
+        return this.items.filter(item => typeof item === 'string');
+    }
+
+    ejercicio7() {
+        let counts = {
+            strings: 0,
+            numbers: 0,
+            arrays: 0
+        };
+
+        for (let i = 0; i < this.items.length; i++) {
+            if (typeof this.items[i] === 'string') {
+                counts.strings++;
+            } else if (typeof this.items[i] === 'number') {
+                counts.numbers++;
+            } else if (Array.isArray(this.items[i])) {
+                counts.arrays++;
+            }
+        }
+        return counts;
+    }
+
+    ejercicio8(element) {
+        const index = this.items.indexOf(element);
+        if (index !== -1) {
+            this.items.splice(index, 1);
+            return this.items;
+        } else {
+            return "El elemento no existe en la fila.";
+        }
+    }
+
+    ejercicio9(position) {
+        if (position >= 0 && position < this.items.length) {
+            this.items.splice(position, 1);
+            return this.items;
+
+        } else {
+            return "La posición no es válida.";
+        }
+    }
+
+    ejercicio10(element) {
+        if(element >=0 && element < this.tamano()){
+          this.items.splice(this.tamano,element);
+          return this.items;
+        } else{
+          return "La posición no es válida.";
+        }
+       }
+
+}
+
+const objFila = new Fila();
+
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(1)
+objFila.enfilar('ROST')
+objFila.enfilar(6)
+objFila.enfilar('LILA')
+objFila.enfilar(3)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+
+console.log('Caso de prueba 1, Ejercicio 1:');
+console.log(objFila.ejercicio1(5));
+console.log('Caso de prueba 2, Ejercicio 1:');
+console.log(objFila.ejercicio1(10));
+//limpiamos arreglo de items para caso de prueba 1 ejercicio 2
+objFila.items = [];
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(4)
+objFila.enfilar('ROST')
+objFila.enfilar(6)
+objFila.enfilar('LILA')
+objFila.enfilar(8)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+console.log('Caso de prueba 1, Ejercicio 2:')
+console.log(objFila.ejercicio2());
+//limpiamos arreglo de items para caso de prueba 2 ejercicio 2
+objFila.items = [];
+
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(1)
+objFila.enfilar('ROST')
+objFila.enfilar(2)
+objFila.enfilar('LILA')
+objFila.enfilar(3)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+console.log('Caso de prueba 2, Ejercicio 2:')
+console.log(objFila.ejercicio2());
+//limpiamos
+objFila.items = [];
+//asignamos
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(4)
+objFila.enfilar('ROST')
+objFila.enfilar(6)
+objFila.enfilar('LILA')
+objFila.enfilar(8)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+console.log('Caso de prueba 1 Ejercicio 3')
+console.log(objFila.ejercicio3());
+//limpiamos
+objFila.items = [];
+//asignamos
+
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(1)
+objFila.enfilar('ROST')
+objFila.enfilar(2)
+objFila.enfilar('LILA')
+objFila.enfilar(3)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+console.log('Caso de prueba 2, Ejercicio 3');
+console.log(objFila.ejercicio3());
+//limpiamos
+objFila.items=[];
+
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(4)
+objFila.enfilar('ROST')
+objFila.enfilar(6)
+objFila.enfilar('LILA')
+objFila.enfilar(8)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+console.log('Caso prueba 1, ejercicio 4');
+console.log(objFila.ejercicio4());
+//limpiamos
+objFila.items=[]
+
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(1)
+objFila.enfilar('ROST')
+objFila.enfilar(2)
+objFila.enfilar('LILA')
+objFila.enfilar(3)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+console.log('Caso prueba 2, ejercicio 4');
+console.log(objFila.ejercicio4());
+
+//limpiamos
+objFila.items=[]
+
+
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(4)
+objFila.enfilar('ROST')
+objFila.enfilar(6)
+objFila.enfilar('LILA')
+objFila.enfilar(8)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+
+console.log('Caso prueba 1, ejercicio 5');
+console.log(objFila.ejercicio5());
+
+//limpiamos
+objFila.items=[]
+
+
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(1)
+objFila.enfilar('ROST')
+objFila.enfilar(2)
+objFila.enfilar('LILA')
+objFila.enfilar(3)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+
+console.log('Caso prueba 2, ejercicio 5');
+console.log(objFila.ejercicio5());
+
+//limpiamos
+objFila.items=[]
+
+
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(4)
+objFila.enfilar('ROST')
+objFila.enfilar(6)
+objFila.enfilar('LILA')
+objFila.enfilar(8)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+
+console.log('Caso prueba 1, ejercicio 6');
+console.log(objFila.ejercicio6());
+
+//limpiamos
+objFila.items=[]
+
+
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(1)
+objFila.enfilar('ROST')
+objFila.enfilar(2)
+objFila.enfilar('LILA')
+objFila.enfilar(3)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar('LUISA')
+objFila.enfilar(10)
+
+console.log('Caso prueba 2, ejercicio 6');
+console.log(objFila.ejercicio6());
+
+
+//limpiamos
+objFila.items=[]
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(4)
+objFila.enfilar('ROST')
+objFila.enfilar(6)
+objFila.enfilar('LILA')
+objFila.enfilar(8)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+
+console.log('Caso prueba 1, ejercicio 7');
+console.log(objFila.ejercicio7());
+
+//limpiamos
+objFila.items=[]
+
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(1)
+objFila.enfilar('ROST')
+objFila.enfilar(2)
+objFila.enfilar('LILA')
+objFila.enfilar(3)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+
+console.log('Caso prueba 2, ejercicio 7');
+console.log(objFila.ejercicio7());
+
+//limpiamos
+objFila.items=[]
+
+
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(4)
+objFila.enfilar('ROST')
+objFila.enfilar(6)
+objFila.enfilar('LILA')
+objFila.enfilar(8)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+
+console.log('Caso prueba 1, ejercicio 8');
+console.log(objFila.ejercicio8('LILA'));
+
+//limpiamos
+objFila.items=[]
+
+
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(4)
+objFila.enfilar('ROST')
+objFila.enfilar(6)
+objFila.enfilar('LILA')
+objFila.enfilar(8)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+
+console.log('Caso prueba 2, ejercicio 8');
+console.log(objFila.ejercicio8('MIKE'));
+
+//limpiamos
+objFila.items = [];
+
+
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(4)
+objFila.enfilar('ROST')
+objFila.enfilar(6)
+objFila.enfilar('LILA')
+objFila.enfilar(8)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+
+console.log('Caso prueba 1, ejercicio 9');
+console.log(objFila.ejercicio9(5));
+
+//limpiar
+objFila.items=[]
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(1)
+objFila.enfilar('ROST')
+objFila.enfilar(2)
+objFila.enfilar('LILA')
+objFila.enfilar(3)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+
+console.log('Caso prueba 2, ejercicio 9');
+console.log(objFila.ejercicio9(3));
+
+//Limpiar
+objFila.items=[];
+
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(4)
+objFila.enfilar('ROST')
+objFila.enfilar(6)
+objFila.enfilar('LILA')
+objFila.enfilar(8)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+
+console.log('Caso prueba 1, ejercicio 10');
+console.log(objFila.ejercicio10(5));
+//limpiamos
+objFila.items = [];
+objFila.enfilar(2)
+objFila.enfilar('MIKE')
+objFila.enfilar(1)
+objFila.enfilar('ROST')
+objFila.enfilar(2)
+objFila.enfilar('LILA')
+objFila.enfilar(3)
+objFila.enfilar('JUAN')
+objFila.enfilar('PIPE')
+objFila.enfilar(10)
+
+console.log('Caso prueba 2, ejercicio 10');
+console.log(objFila.ejercicio10(4));
