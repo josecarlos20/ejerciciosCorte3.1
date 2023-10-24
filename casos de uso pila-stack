@@ -150,10 +150,10 @@ console.log("Ejercicio 7 caso de prueba 1:", pila1.ejercicio7());
 console.log("Ejercicio 7 caso de prueba 2:", pila2.ejercicio7());
 
 console.log("Ejercicio 8 caso de prueba 1:", pila1.ejercicio8('LILA'));
-console.log("Ejercicio 8 caso de prueba 2:", pila2.ejercicio8('LILA'));
+console.log("Ejercicio 8 caso de prueba 2:", pila2.ejercicio8('MIKE'));
 
-console.log("Ejercicio 9 caso de prueba 1:", pila1.ejercicio9(1));
-console.log("Ejercicio 9 caso de prueba 2:", pila2.ejercicio9(1));
+console.log("Ejercicio 9 caso de prueba 1:", pila1.ejercicio9(5));
+console.log("Ejercicio 9 caso de prueba 2:", pila2.ejercicio9(3));
 
-console.log("Ejercicio 10 caso de prueba 1:", pila1.ejercicio10(2));
-console.log("Ejercicio 10 caso de prueba 2:", pila2.ejercicio10(2));
+console.log("Ejercicio 10 caso de prueba 1:", pila1.ejercicio10(5));
+console.log("Ejercicio 10 caso de prueba 2:", pila2.ejercicio10(4));
