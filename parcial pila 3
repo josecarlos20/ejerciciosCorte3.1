@@ -1,0 +1,95 @@
+class Pila {
+  constructor() {
+    this.items = [];
+  }
+
+  apilar(elemento) {
+    this.items.push(elemento);
+  }
+
+  desapilar() {
+    if (this.estaVacia()) {
+      return "La pila está vacía";
+    }
+    return this.items.pop();
+  }
+
+  estaVacia() {
+    return this.items.length === 0;
+  }
+
+  verElementos() {
+    return this.items;
+  }
+}
+
+function enpilarPorEdad(persona, pila) {
+  if (persona.edad > 70) {
+    // Mayor de 70 años, se pone al principio de la pila.
+    pila.items.unshift(persona);
+  } else if (persona.edad >= 40 && persona.edad <= 69) {
+    let altaPrioridad = new Pila();
+    let mediaPrioridad = new Pila();
+    let bajaPrioridad = new Pila();
+
+    // Separar por prioridad.
+    while (!pila.estaVacia()) {
+      const actual = pila.desapilar();
+      if (actual.prioridad === "alta") {
+        altaPrioridad.apilar(actual);
+      } else if (actual.prioridad === "media") {
+        mediaPrioridad.apilar(actual);
+      } else {
+        bajaPrioridad.apilar(actual);
+      }
+    }
+
+    // Apilar según la prioridad.
+    if (persona.prioridad === "alta") {
+      altaPrioridad.apilar(persona);
+    } else if (persona.prioridad === "media") {
+      mediaPrioridad.apilar(persona);
+    } else {
+      bajaPrioridad.apilar(persona);
+    }
+
+    // Reorganizar la pila.
+    while (!altaPrioridad.estaVacia()) {
+      pila.apilar(altaPrioridad.desapilar());
+    }
+    while (!mediaPrioridad.estaVacia()) {
+      pila.apilar(mediaPrioridad.desapilar());
+    }
+    while (!bajaPrioridad.estaVacia()) {
+      pila.apilar(bajaPrioridad.desapilar());
+    }
+  } else {
+    // Menor de 40 años, se pone al principio de la pila.
+    pila.items.unshift(persona);
+  }
+}
+
+const pila1 = new Pila();
+
+pila1.apilar({ nombre: 'A', edad: 12, prioridad: 'baja' });
+pila1.apilar({ nombre: 'B', edad: 34, prioridad: 'media' });
+pila1.apilar({ nombre: 'C', edad: 56, prioridad: 'alta' });
+pila1.apilar({ nombre: 'D', edad: 76, prioridad: 'baja' });
+pila1.apilar({ nombre: 'E', edad: 23, prioridad: 'media' });
+
+pila1.desapilar();
+
+pila1.apilar({ nombre: 'F', edad: 44, prioridad: 'alta' });
+pila1.apilar({ nombre: 'G', edad: 69, prioridad: 'baja' });
+pila1.apilar({ nombre: 'J', edad: 77, prioridad: 'baja' }); // Cambiado de 'I' a 'J'
+pila1.apilar({ nombre: 'H', edad: 99, prioridad: 'media' }); // Cambiado de 'J' a 'H'
+pila1.apilar({ nombre: 'I', edad: 100, prioridad: 'alta' }); // Cambiado de 'H' a 'I'
+pila1.apilar({ nombre: 'K', edad: 11, prioridad: 'media' });
+
+pila1.desapilar();
+pila1.desapilar();
+
+pila1.apilar({ nombre: 'O', edad: 120, prioridad: 'alta' });
+pila1.apilar({ nombre: 'M', edad: 123, prioridad: 'baja' });
+
+console.log(pila1.verElementos());
