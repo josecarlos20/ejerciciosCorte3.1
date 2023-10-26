@@ -13,14 +13,6 @@ class PilaStack {
     return ultimo;
   }
 
-  longitud() {
-    return this.elementos.length;
-  }
-
-  verProximo() {
-    return this.elementos[this.elementos.length - 1];
-  }
-
   verElementos() {
     return this.elementos;
   }
@@ -37,9 +29,9 @@ pila1.enpilar({ nombre: 'E', edad: 23, prioridad: 'media' });
 pila1.desenpilar();
 pila1.enpilar({ nombre: 'F', edad: 44, prioridad: 'alta' });
 pila1.enpilar({ nombre: 'G', edad: 69, prioridad: 'baja' });
-pila1.enpilar({ nombre: 'H', edad: 99, prioridad: 'media' });
-pila1.enpilar({ nombre: 'I', edad: 100, prioridad: 'alta' });
-pila1.enpilar({ nombre: 'J', edad: 77, prioridad: 'baja' });
+pila1.enpilar({ nombre: 'J', edad: 77, prioridad: 'baja' }); // Cambiado de 'I' a 'J'
+pila1.enpilar({ nombre: 'H', edad: 99, prioridad: 'media' }); // Cambiado de 'J' a 'H'
+pila1.enpilar({ nombre: 'I', edad: 100, prioridad: 'alta' }); // Cambiado de 'H' a 'I'
 pila1.enpilar({ nombre: 'K', edad: 11, prioridad: 'media' });
 pila1.desenpilar();
 pila1.desenpilar();
