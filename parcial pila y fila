@@ -1,0 +1,115 @@
+class Persona {
+  constructor(nombre, edad, prioridad) {
+    this.nombre = nombre;
+    this.edad = edad;
+    this.prioridad = prioridad;
+  }
+}
+
+class Fila {
+  constructor() {
+    this.elementos = [];
+  }
+
+  encolar(persona) {
+    this.elementos.push(persona);
+  }
+
+  encolarPorEdad(persona) {
+    if (persona.edad > 70) {
+      this.elementos.unshift(persona); // Si la edad es mayor de 70, lo ponemos al principio.
+    } else {
+      this.elementos.push(persona); // En otros casos, lo ponemos al final.
+    }
+  }
+
+  desencolar() {
+    return this.elementos.shift();
+  }
+
+  verElementos() {
+    if (this.elementos.length === 0) {
+      console.log('La FILA está vacía.');
+      return;
+    }
+
+    for (const persona of this.elementos) {
+      console.log(`${persona.nombre} (${persona.edad} años, prioridad: ${persona.prioridad})`);
+    }
+  }
+}
+
+class Pila {
+  constructor() {
+    this.elementos = [];
+  }
+
+  enpilar(persona) {
+    this.elementos.push(persona);
+  }
+
+  enpilarPorEdad(persona) {
+    if (persona.edad > 70) {
+      this.elementos.unshift(persona); // Si la edad es mayor de 70, lo ponemos al principio.
+    } else {
+      this.elementos.push(persona); // En otros casos, lo ponemos al final.
+    }
+  }
+
+  desenpilar() {
+    return this.elementos.pop();
+  }
+
+  verElementos() {
+    if (this.elementos.length === 0) {
+      console.log('La PILA está vacía.');
+      return;
+    }
+
+    for (const persona of this.elementos) {
+      console.log(`${persona.nombre} (${persona.edad} años, prioridad: ${persona.prioridad})`);
+    }
+  }
+}
+
+// Caso de prueba 1 (FILA)
+const fila1 = new Fila();
+fila1.encolar(new Persona('A', 12, 'baja'));
+fila1.encolar(new Persona('B', 34, 'media'));
+fila1.encolar(new Persona('C', 56, 'alta'));
+fila1.encolar(new Persona('D', 76, 'baja'));
+fila1.encolar(new Persona('E', 23, 'media'));
+fila1.desencolar();
+fila1.encolarPorEdad(new Persona('F', 44, 'alta'));
+fila1.encolarPorEdad(new Persona('G', 69, 'baja'));
+fila1.encolarPorEdad(new Persona('H', 99, 'media'));
+fila1.encolarPorEdad(new Persona('I', 100, 'alta'));
+fila1.encolarPorEdad(new Persona('J', 77, 'baja'));
+fila1.encolarPorEdad(new Persona('K', 11, 'media'));
+fila1.desencolar();
+fila1.desencolar();
+fila1.encolar(new Persona('O', 120, 'alta'));
+fila1.encolar(new Persona('M', 123, 'baja'));
+console.log('fila')
+fila1.verElementos();
+
+// Caso de prueba 2 (PILA)
+const pila1 = new Pila();
+pila1.enpilar(new Persona('A', 12, 'baja'));
+pila1.enpilar(new Persona('B', 34, 'media'));
+pila1.enpilar(new Persona('C', 56, 'alta'));
+pila1.enpilar(new Persona('D', 76, 'baja'));
+pila1.enpilar(new Persona('E', 23, 'media'));
+pila1.desenpilar();
+pila1.enpilarPorEdad(new Persona('F', 44, 'alta'));
+pila1.enpilarPorEdad(new Persona('G', 69, 'baja'));
+pila1.enpilarPorEdad(new Persona('H', 99, 'media'));
+pila1.enpilarPorEdad(new Persona('I', 100, 'alta'));
+pila1.enpilarPorEdad(new Persona('J', 77, 'baja'));
+pila1.enpilarPorEdad(new Persona('K', 11, 'media'));
+pila1.desenpilar();
+pila1.desenpilar();
+pila1.enpilar(new Persona('O', 120, 'alta'));
+pila1.enpilar(new Persona('M', 123, 'baja'));
+console.log('pila')
+pila1.verElementos();
