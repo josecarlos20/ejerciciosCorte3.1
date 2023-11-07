@@ -1,0 +1,168 @@
+class Fila {
+  constructor() {
+    this.elementos = [];
+  }
+
+  // Método para llenar la fila con elementos
+  llenarFila(N) {
+    for (let i = 0; i < N; i++) {
+      this.elementos.push(i);
+    }
+  }
+
+  // Método para verificar si todos los elementos son pares, impares, o mixtos
+  elementosSonPares() {
+    for (let i = 0; i < this.elementos.length; i++) {
+      if (this.elementos[i] % 2 !== 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  elementosSonImpares() {
+    for (let i = 0; i < this.elementos.length; i++) {
+      if (this.elementos[i] % 2 === 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // Método para sumar los elementos numéricos en la fila
+  sumaElementosNumericos() {
+    let suma = 0;
+    for (let i = 0; i < this.elementos.length; i++) {
+      if (typeof this.elementos[i] === 'number') {
+        suma += this.elementos[i];
+      }
+    }
+    return suma;
+  }
+
+  // Método para obtener solo números pares de la fila
+  obtenerNumerosPares() {
+    const pares = [];
+    for (let i = 0; i < this.elementos.length; i++) {
+      if (typeof this.elementos[i] === 'number' && this.elementos[i] % 2 === 0) {
+        pares.push(this.elementos[i]);
+      }
+    }
+    return pares;
+  }
+
+  // Método para obtener solo números impares de la fila
+  obtenerNumerosImpares() {
+    const impares = [];
+    for (let i = 0; i < this.elementos.length; i++) {
+      if (typeof this.elementos[i] === 'number' && this.elementos[i] % 2 !== 0) {
+        impares.push(this.elementos[i]);
+      }
+    }
+    return impares;
+  }
+
+  // Método para obtener solo cadenas de la fila
+  obtenerCadenas() {
+    const strings = [];
+    for (let i = 0; i < this.elementos.length; i++) {
+      if (typeof this.elementos[i] === 'string') {
+        strings.push(this.elementos[i]);
+      }
+    }
+    return strings;
+  }
+
+  // Método para contar la cantidad de tipos de datos en la fila
+  contarTiposDeDatos() {
+    const result = {
+      strings: 0,
+      numbers: 0,
+      arrays: 0
+    };
+
+    for (let i = 0; i < this.elementos.length; i++) {
+      if (typeof this.elementos[i] === 'string') {
+        result.strings++;
+      } else if (typeof this.elementos[i] === 'number') {
+        result.numbers++;
+      } else if (Array.isArray(this.elementos[i])) {
+        result.arrays++;
+      }
+    }
+
+    return result;
+  }
+
+  // Método para eliminar un elemento por valor
+  eliminarElementoPorValor(valor) {
+    let encontrado = false;
+    const nuevosElementos = [];
+    for (let i = 0; i < this.elementos.length; i++) {
+      if (this.elementos[i] === valor && !encontrado) {
+        encontrado = true;
+      } else {
+        nuevosElementos.push(this.elementos[i]);
+      }
+    }
+    this.elementos = nuevosElementos;
+
+    if (!encontrado) {
+      console.log("El elemento no existe en la fila.");
+    }
+  }
+
+  // Método para eliminar un elemento por posición
+  eliminarElementoPorPosicion(posicion) {
+    if (posicion >= 0 && posicion < this.elementos.length) {
+      const nuevosElementos = [];
+      for (let i = 0; i < this.elementos.length; i++) {
+        if (i !== posicion) {
+          nuevosElementos.push(this.elementos[i]);
+        }
+      }
+      this.elementos = nuevosElementos;
+    } else {
+      console.log("La posición especificada no es válida.");
+    }
+  }
+
+  // Método para eliminar elementos hasta una posición dada
+  eliminarElementosHastaPosicion(posicion) {
+    if (posicion >= 0 && posicion < this.elementos.length) {
+      const nuevosElementos = [];
+      for (let i = posicion + 1; i < this.elementos.length; i++) {
+        nuevosElementos.push(this.elementos[i]);
+      }
+      this.elementos = nuevosElementos;
+    } else {
+      console.log("La posición especificada no es válida.");
+    }
+  }
+}
+
+// Ejemplo de uso:
+const fila = new Fila();
+fila.llenarFila(4);
+console.log(fila.elementos);
+
+console.log("¿Todos los elementos son pares?", fila.elementosSonPares());
+console.log("¿Todos los elementos son impares?", fila.elementosSonImpares());
+
+console.log("Suma de elementos numéricos:", fila.sumaElementosNumericos());
+
+console.log("Números pares en la fila:", fila.obtenerNumerosPares());
+console.log("Números impares en la fila:", fila.obtenerNumerosImpares());
+
+console.log("Cadenas en la fila:", fila.obtenerCadenas());
+
+console.log("Conteo de tipos de datos:", fila.contarTiposDeDatos());
+
+fila.eliminarElementoPorValor(3);
+console.log("Fila después de eliminar el valor 3:", fila.elementos);
+
+fila.eliminarElementoPorPosicion(1);
+console.log("Fila después de eliminar el elemento en la posición 1:", fila.elementos);
+
+fila.eliminarElementosHastaPosicion(1);
+console.log("Fila después de eliminar elementos hasta la posición 1:", fila.elementos);
