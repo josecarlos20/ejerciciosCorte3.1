@@ -1,0 +1,141 @@
+class Nodo {
+  constructor(value) {
+    this.valor = value;
+    this.derecha = null;
+    this.izquierda = null;
+  }
+}
+
+class ArbolBinario {
+  constructor() {
+    this.cabeza = null;
+  }
+
+  esta_vacio() {
+    return this.cabeza === null;
+  }
+
+  agregar(value) {
+    if (this.esta_vacio()) {
+      this.cabeza = new Nodo(value);
+      return;
+    }
+
+    var aux = this.cabeza;
+
+    while (aux) {
+      if (value < aux.valor) {
+        if (aux.izquierda) {
+          aux = aux.izquierda;
+        } else {
+          aux.izquierda = new Nodo(value);
+          return;
+        }
+      } else {
+        if (aux.derecha) {
+          aux = aux.derecha;
+        } else {
+          aux.derecha = new Nodo(value);
+          return;
+        }
+      }
+    }
+  }
+
+  pre_order(nodo = this.cabeza) {
+    if (!nodo) {
+      return;
+    }
+    console.log(nodo.valor);
+    this.pre_order(nodo.izquierda);
+    this.pre_order(nodo.derecha);
+  }
+
+  post_order(nodo = this.cabeza) {
+    if (!nodo) {
+      return;
+    }
+    this.post_order(nodo.izquierda);
+    this.post_order(nodo.derecha);
+    console.log(nodo.valor);
+  }
+
+  in_order(nodo = this.cabeza) {
+    if (!nodo) {
+      return;
+    }
+    this.in_order(nodo.izquierda);
+    console.log(nodo.valor);
+    this.in_order(nodo.derecha);
+  }
+
+  generar_arbol_desde_arreglo(arreglo) {
+    for (const valor of arreglo) {
+      this.agregar(valor);
+    }
+  }
+
+  encontrar_maximo() {
+    if (this.esta_vacio()) {
+      return null;
+    }
+
+    let max = this.cabeza;
+    let niveles = 0;
+
+    while (max.derecha) {
+      max = max.derecha;
+      niveles++;
+    }
+
+    return { valor: max.valor, niveles: niveles };
+  }
+
+  encontrar_minimo() {
+    if (this.esta_vacio()) {
+      return null;
+    }
+
+    let min = this.cabeza;
+    let niveles = 0;
+
+    while (min.izquierda) {
+      min = min.izquierda;
+      niveles++;
+    }
+
+    return { valor: min.valor, niveles: niveles };
+  }
+}
+
+// Crear una instancia de ArbolBinario
+const arbol = new ArbolBinario();
+
+// Ejercicio 1 - Crear árboles con las listas dadas
+const listaA = [10, 5, 7, 3, 2, 8, 9, 11, 12, 1];
+const listaB = [7, 4, 8, 9, 10, 3, 0, 2, 1];
+const listaC = [15, 12, 13, 16, 17, 11, 10, 18, 19];
+const listaD = [5, 3, 2, 4, 8, 7, 12, 11, 1, 0, 13];
+const listaE = [10, 3, 2, 4, 8, 7, 12, 11, 1, 0, 13];
+
+arbol.generar_arbol_desde_arreglo(listaA);
+console.log("Árbol construido a partir de lista A:");
+arbol.in_order();
+
+// Ejercicio 2 - Realizar los 3 ordenamientos
+console.log("Recorrido Preorden:");
+arbol.pre_order();
+
+console.log("Recorrido Postorden:");
+arbol.post_order();
+
+console.log("Recorrido Inorden:");
+arbol.in_order();
+
+// Ejercicio 6 - Generar un árbol a partir de un arreglo
+const arregloDeValores = [10, 5, 15, 3, 7, 12, 18];
+const nuevoArbol = new ArbolBinario();
+nuevoArbol.generar_arbol_desde_arreglo(arregloDeValores);
+
+console.log("Nuevo árbol generado a partir del arreglo:");
+nuevoArbol.in_order();
